@@ -48,7 +48,7 @@ jobs:
           fi
 
       - name: Generate HTML report
-        run: prospector-html --input="${{ env.SEMGREP_OUTPUT }}" --output="${{ env.HTML_REPORT }}" --filter semgrep
+        run: prospector-html --input="${{ env.SEMGREP_OUTPUT }}" --output="${{ env.HTML_REPORT }}" --filter semgrep --zero-exit
 
       - name: Prepare Pages artifact
         run: |
