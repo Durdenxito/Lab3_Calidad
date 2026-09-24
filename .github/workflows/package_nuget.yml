@@ -82,9 +82,14 @@ jobs:
       - name: Publish package to GitHub Packages
         if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
+          if [ -z "${PACKAGE_TOKEN}" ]; then
+            echo "GitHub Packages token is empty" >&2
+            exit 1
+          fi
+
           dotnet nuget push "${PACKAGE_OUTPUT}"/*.nupkg \
             --source "${PACKAGE_SOURCE}" \
             --api-key "${PACKAGE_TOKEN}" \
             --skip-duplicate
         env:
-          PACKAGE_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
+          PACKAGE_TOKEN: ${{ github.token }}
