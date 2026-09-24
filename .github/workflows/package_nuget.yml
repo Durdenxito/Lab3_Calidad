@@ -92,4 +92,4 @@ jobs:
             --api-key "${PACKAGE_TOKEN}" \
             --skip-duplicate
         env:
-          PACKAGE_TOKEN: ${{ github.token }}
+          PACKAGE_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
