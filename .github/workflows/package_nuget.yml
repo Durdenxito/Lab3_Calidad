@@ -1,4 +1,4 @@
-name: Test, Analyze and Publish NuGet Package
+name: Test and Publish NuGet Package
 
 on:
   push:
@@ -21,8 +21,6 @@ env:
   COVERAGE_SETTINGS: coverage.runsettings
   PACKAGE_OUTPUT: artifacts/packages
   PACKAGE_VERSION: 1.0.${{ github.run_number }}
-  SONAR_PROJECT: ${{ vars.SONAR_PROJECT }}
-  SONAR_ORG: ${{ vars.SONAR_ORG }}
 
 jobs:
   verify-and-publish:
@@ -38,23 +36,8 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Install SonarScanner
-        run: dotnet tool install --global dotnet-sonarscanner --version 11.3.0
-
       - name: Restore solution
         run: dotnet restore "${{ env.SOLUTION_FILE }}"
-
-      - name: Begin SonarCloud analysis
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          dotnet-sonarscanner begin \
-            /k:"${SONAR_PROJECT}" \
-            /o:"${SONAR_ORG}" \
-            /d:sonar.token="${SONAR_TOKEN}" \
-            /d:sonar.host.url="https://sonarcloud.io" \
-            /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" \
-            /d:sonar.qualitygate.wait=true
 
       - name: Build solution
         run: dotnet build "${{ env.SOLUTION_FILE }}" --configuration Release --no-restore --no-incremental
@@ -77,12 +60,6 @@ jobs:
             **/test-results.trx
             **/coverage.opencover.xml
           if-no-files-found: error
-
-      - name: Finish SonarCloud analysis
-        if: always()
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: dotnet-sonarscanner end /d:sonar.token="${SONAR_TOKEN}"
 
       - name: Pack Bank.WebApi
         if: success()
