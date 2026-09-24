@@ -16,8 +16,4 @@ jobs:
       #   with:
       #     dotnet-version: ${{ env.DOTNET_VERSION }}  
       - name: Semgrep scan
-        run: semgrep scan --config="p/default" --sarif --output=report.sarif --metrics=off
-      - name: Upload result to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: report.sarif
+        run: semgrep scan --config="p/default" --metrics=off
