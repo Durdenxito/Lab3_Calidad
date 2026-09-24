@@ -8,8 +8,6 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages
@@ -17,6 +15,8 @@ concurrency:
 
 env:
   PYTHON_VERSION: '3.12'
+  SEMGREP_VERSION: '1.178.0'
+  PROSPECTOR_HTML_VERSION: '2.0.0'
   SEMGREP_CONFIG: p/default
   SEMGREP_OUTPUT: semgrep.json
   HTML_REPORT: semgrep-report.html
@@ -24,6 +24,9 @@ env:
 
 jobs:
   security:
+    permissions:
+      contents: read
+      pages: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -35,7 +38,12 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Install analysis tools
-        run: python -m pip install --disable-pip-version-check semgrep prospector2html
+        run: >-
+          python -m pip install
+          --disable-pip-version-check
+          --only-binary=:all:
+          "semgrep==${{ env.SEMGREP_VERSION }}"
+          "prospector2html==${{ env.PROSPECTOR_HTML_VERSION }}"
 
       - name: Run Semgrep
         run: |
@@ -64,6 +72,9 @@ jobs:
           path: ${{ env.PAGES_DIR }}
 
   deploy:
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
