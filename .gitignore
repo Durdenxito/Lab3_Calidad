@@ -1,0 +1,21 @@
+# Build output
+**/bin/
+**/obj/
+
+# Test and coverage output
+**/TestResults/
+Cobertura/
+
+# Generated documentation site
+_site/
+
+# Local environment and user files
+.env
+.env.*
+!.env.example
+*.user
+*.suo
+
+# Generated analysis reports
+semgrep.json
+semgrep-report.html
