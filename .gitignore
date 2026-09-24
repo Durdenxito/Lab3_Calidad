@@ -5,6 +5,7 @@
 # Test and coverage output
 **/TestResults/
 Cobertura/
+artifacts/
 
 # Generated documentation site
 _site/
