@@ -1,0 +1,68 @@
+name: Publish Documentation
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: documentation-pages
+  cancel-in-progress: true
+
+env:
+  DOTNET_VERSION: '10.x'
+  DOCFX_VERSION: '2.80.1'
+  DOCFX_CONFIG: docfx.json
+  DOCFX_OUTPUT: _site
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Install DocFX
+        run: dotnet tool install --global docfx --version "${{ env.DOCFX_VERSION }}"
+
+      - name: Initialize DocFX
+        run: |
+          if [ ! -f "${{ env.DOCFX_CONFIG }}" ]; then
+            docfx init -y
+          fi
+
+      - name: Generate API metadata
+        run: docfx metadata "${{ env.DOCFX_CONFIG }}"
+
+      - name: Build documentation site
+        run: docfx build "${{ env.DOCFX_CONFIG }}"
+
+      - name: Configure Pages
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa
+        with:
+          path: ${{ env.DOCFX_OUTPUT }}
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e

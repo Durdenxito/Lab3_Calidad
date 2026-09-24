@@ -14,12 +14,18 @@ items:
   fullName: Bank.Domain.Tests.BankAccountTests
   type: Class
   source:
+    remote:
+      path: Bank.WebApi.Test/Bank.WepApi.Tests.cs
+      branch: main
+      repo: https://github.com/Durdenxito/Lab3_Calidad.git
     id: BankAccountTests
-    path: C:\Bank3\Bank.WebApi.Test\Bank.WepApi.Tests.cs
-    startLine: 5
+    path: Bank.WebApi.Test/Bank.WepApi.Tests.cs
+    startLine: 8
   assemblies:
   - Bank.WebApi.Test
   namespace: Bank.Domain.Tests
+  summary: Verifies the behavior of <xref href="Bank.WebApi.Models.BankAccount" data-throw-if-not-resolved="false"></xref>.
+  example: []
   syntax:
     content: >-
       [TestClass]
@@ -55,19 +61,25 @@ items:
   fullName: Bank.Domain.Tests.BankAccountTests.Debit_WithValidAmount_UpdatesBalance()
   type: Method
   source:
+    remote:
+      path: Bank.WebApi.Test/Bank.WepApi.Tests.cs
+      branch: main
+      repo: https://github.com/Durdenxito/Lab3_Calidad.git
     id: Debit_WithValidAmount_UpdatesBalance
-    path: C:\Bank3\Bank.WebApi.Test\Bank.WepApi.Tests.cs
-    startLine: 8
+    path: Bank.WebApi.Test/Bank.WepApi.Tests.cs
+    startLine: 14
   assemblies:
   - Bank.WebApi.Test
   namespace: Bank.Domain.Tests
+  summary: Verifies that debiting a valid amount updates the balance.
+  example: []
   syntax:
     content: >-
-      [TestMethod("C:\\Bank3\\Bank.WebApi.Test\\Bank.WepApi.Tests.cs", 9)]
+      [TestMethod("C:\\Bank3\\Bank.WebApi.Test\\Bank.WepApi.Tests.cs", 15)]
 
       public void Debit_WithValidAmount_UpdatesBalance()
     content.vb: >-
-      <TestMethod("C:\Bank3\Bank.WebApi.Test\Bank.WepApi.Tests.cs", 9)>
+      <TestMethod("C:\Bank3\Bank.WebApi.Test\Bank.WepApi.Tests.cs", 15)>
 
       Public Sub Debit_WithValidAmount_UpdatesBalance()
   overload: Bank.Domain.Tests.BankAccountTests.Debit_WithValidAmount_UpdatesBalance*
@@ -78,8 +90,14 @@ items:
     - type: System.String
       value: C:\Bank3\Bank.WebApi.Test\Bank.WepApi.Tests.cs
     - type: System.Int32
-      value: 9
+      value: 15
 references:
+- uid: Bank.WebApi.Models.BankAccount
+  commentId: T:Bank.WebApi.Models.BankAccount
+  href: Bank.WebApi.Models.BankAccount.html
+  name: BankAccount
+  nameWithType: BankAccount
+  fullName: Bank.WebApi.Models.BankAccount
 - uid: Bank.Domain.Tests
   commentId: N:Bank.Domain.Tests
   href: Bank.html

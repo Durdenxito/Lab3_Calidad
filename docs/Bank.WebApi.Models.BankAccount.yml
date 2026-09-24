@@ -18,12 +18,18 @@ items:
   fullName: Bank.WebApi.Models.BankAccount
   type: Class
   source:
+    remote:
+      path: Bank.WebApi/Models/BankAccount.cs
+      branch: main
+      repo: https://github.com/Durdenxito/Lab3_Calidad.git
     id: BankAccount
-    path: C:\Bank3\Bank.WebApi\Models\BankAccount.cs
-    startLine: 2
+    path: Bank.WebApi/Models/BankAccount.cs
+    startLine: 5
   assemblies:
   - Bank.WebApi
   namespace: Bank.WebApi.Models
+  summary: Represents a customer's bank account and its current balance.
+  example: []
   syntax:
     content: public class BankAccount
     content.vb: Public Class BankAccount
@@ -49,19 +55,27 @@ items:
   fullName: Bank.WebApi.Models.BankAccount.BankAccount(string, double)
   type: Constructor
   source:
+    remote:
+      path: Bank.WebApi/Models/BankAccount.cs
+      branch: main
+      repo: https://github.com/Durdenxito/Lab3_Calidad.git
     id: .ctor
-    path: C:\Bank3\Bank.WebApi\Models\BankAccount.cs
-    startLine: 7
+    path: Bank.WebApi/Models/BankAccount.cs
+    startLine: 16
   assemblies:
   - Bank.WebApi
   namespace: Bank.WebApi.Models
+  summary: Creates a bank account with an owner and an initial balance.
+  example: []
   syntax:
     content: public BankAccount(string customerName, double balance)
     parameters:
     - id: customerName
       type: System.String
+      description: Name of the account owner.
     - id: balance
       type: System.Double
+      description: Initial account balance.
     content.vb: Public Sub New(customerName As String, balance As Double)
   overload: Bank.WebApi.Models.BankAccount.#ctor*
   nameWithType.vb: BankAccount.New(String, Double)
@@ -79,12 +93,18 @@ items:
   fullName: Bank.WebApi.Models.BankAccount.CustomerName
   type: Property
   source:
+    remote:
+      path: Bank.WebApi/Models/BankAccount.cs
+      branch: main
+      repo: https://github.com/Durdenxito/Lab3_Calidad.git
     id: CustomerName
-    path: C:\Bank3\Bank.WebApi\Models\BankAccount.cs
-    startLine: 12
+    path: Bank.WebApi/Models/BankAccount.cs
+    startLine: 25
   assemblies:
   - Bank.WebApi
   namespace: Bank.WebApi.Models
+  summary: Gets the name of the account owner.
+  example: []
   syntax:
     content: public string CustomerName { get; }
     parameters: []
@@ -104,12 +124,18 @@ items:
   fullName: Bank.WebApi.Models.BankAccount.Balance
   type: Property
   source:
+    remote:
+      path: Bank.WebApi/Models/BankAccount.cs
+      branch: main
+      repo: https://github.com/Durdenxito/Lab3_Calidad.git
     id: Balance
-    path: C:\Bank3\Bank.WebApi\Models\BankAccount.cs
-    startLine: 13
+    path: Bank.WebApi/Models/BankAccount.cs
+    startLine: 30
   assemblies:
   - Bank.WebApi
   namespace: Bank.WebApi.Models
+  summary: Gets the current account balance.
+  example: []
   syntax:
     content: public double Balance { get; }
     parameters: []
@@ -129,19 +155,30 @@ items:
   fullName: Bank.WebApi.Models.BankAccount.Debit(double)
   type: Method
   source:
+    remote:
+      path: Bank.WebApi/Models/BankAccount.cs
+      branch: main
+      repo: https://github.com/Durdenxito/Lab3_Calidad.git
     id: Debit
-    path: C:\Bank3\Bank.WebApi\Models\BankAccount.cs
-    startLine: 14
+    path: Bank.WebApi/Models/BankAccount.cs
+    startLine: 37
   assemblies:
   - Bank.WebApi
   namespace: Bank.WebApi.Models
+  summary: Withdraws an amount from the account.
+  example: []
   syntax:
     content: public void Debit(double amount)
     parameters:
     - id: amount
       type: System.Double
+      description: Amount to withdraw.
     content.vb: Public Sub Debit(amount As Double)
   overload: Bank.WebApi.Models.BankAccount.Debit*
+  exceptions:
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: Thrown when the amount is negative or exceeds the balance.
   nameWithType.vb: BankAccount.Debit(Double)
   fullName.vb: Bank.WebApi.Models.BankAccount.Debit(Double)
   name.vb: Debit(Double)
@@ -157,19 +194,30 @@ items:
   fullName: Bank.WebApi.Models.BankAccount.Credit(double)
   type: Method
   source:
+    remote:
+      path: Bank.WebApi/Models/BankAccount.cs
+      branch: main
+      repo: https://github.com/Durdenxito/Lab3_Calidad.git
     id: Credit
-    path: C:\Bank3\Bank.WebApi\Models\BankAccount.cs
-    startLine: 22
+    path: Bank.WebApi/Models/BankAccount.cs
+    startLine: 51
   assemblies:
   - Bank.WebApi
   namespace: Bank.WebApi.Models
+  summary: Adds an amount to the account balance.
+  example: []
   syntax:
     content: public void Credit(double amount)
     parameters:
     - id: amount
       type: System.Double
+      description: Amount to add.
     content.vb: Public Sub Credit(amount As Double)
   overload: Bank.WebApi.Models.BankAccount.Credit*
+  exceptions:
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: Thrown when the amount is negative.
   nameWithType.vb: BankAccount.Credit(Double)
   fullName.vb: Bank.WebApi.Models.BankAccount.Credit(Double)
   name.vb: Credit(Double)
@@ -484,6 +532,13 @@ references:
   name: Balance
   nameWithType: BankAccount.Balance
   fullName: Bank.WebApi.Models.BankAccount.Balance
+- uid: System.ArgumentOutOfRangeException
+  commentId: T:System.ArgumentOutOfRangeException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception
+  name: ArgumentOutOfRangeException
+  nameWithType: ArgumentOutOfRangeException
+  fullName: System.ArgumentOutOfRangeException
 - uid: Bank.WebApi.Models.BankAccount.Debit*
   commentId: Overload:Bank.WebApi.Models.BankAccount.Debit
   href: Bank.WebApi.Models.BankAccount.html#Bank_WebApi_Models_BankAccount_Debit_System_Double_

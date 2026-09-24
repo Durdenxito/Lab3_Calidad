@@ -3,9 +3,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Bank.Domain.Tests
 {
+    /// <summary>
+    /// Verifies the behavior of <see cref="BankAccount"/>.
+    /// </summary>
     [TestClass]
     public class BankAccountTests
     {
+        /// <summary>
+        /// Verifies that debiting a valid amount updates the balance.
+        /// </summary>
         [TestMethod]
         public void Debit_WithValidAmount_UpdatesBalance()
         {
